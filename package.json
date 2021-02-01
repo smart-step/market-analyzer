@@ -1,0 +1,23 @@
+{
+  "name": "market-analyzer",
+  "author": "James Grams <james@game103.net>",
+  "version": "1.0.0",
+  "description": "market-analyzer",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "dependencies": {
+    "puppeteer": "^5.5.0"
+  },
+  "engines": {
+    "node": ">= 10.10.0",
+    "npm": ">= 3.0.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ]
+}
