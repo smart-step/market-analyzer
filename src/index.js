@@ -3,8 +3,10 @@
  * @author James Grams
  */
 
-const puppeteer = require("puppeteer");
+const puppeteer = require('puppeteer-extra');
 const fs = require("fs");
+const StealthPlugin = require('puppeteer-extra-plugin-stealth');
+puppeteer.use(StealthPlugin())
 
 const USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.142 Safari/537.36";
 const OUTPUT_FILE = "output.csv";
@@ -24,6 +26,20 @@ const HOME_DEPOT = {
 }
 let HOME_DEPOT_TOTO = JSON.parse(JSON.stringify(HOME_DEPOT));
 HOME_DEPOT_TOTO.url = "https://www.homedepot.com/b/Bath-Urinals/TOTO/N-5yc1vZbzblZgy2?NCNI-5";
+const LOWES = {
+    name: "Lowes",
+    url: "https://www.lowes.com/search?searchTerm=urinals&refinement=4294927394",
+    element: '[data-selector="prd-image-holder"]',
+    model: {
+        element: '[data-selector="prd-iteminfo-holder"]',
+        regex: "Model #(.*)",
+        sibling: true
+    },
+    price: {
+        element: '[data-selector="prd-price-holder"]',
+        sibling: true
+    }
+}
 const COMPANIES = [
     {
         name: "Kohler",
@@ -39,21 +55,8 @@ const COMPANIES = [
                     element: ".product-panel__sku"
                 }
             },
-            HOME_DEPOT/*,
-            {
-                name: "Lowes",
-                url: "https://www.lowes.com/search?searchTerm=urinals&refinement=4294927394",
-                element: '[data-selector="prd-image-holder"]',
-                model: {
-                    element: '[data-selector="prd-iteminfo-holder"]',
-                    regex: "Model #(.*)",
-                    sibling: true
-                },
-                price: {
-                    element: '[data-selector="prd-price-holder"]',
-                    sibling: true
-                }
-            }*/
+            HOME_DEPOT,
+            LOWES
         ]
     },
     {
